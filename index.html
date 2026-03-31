@@ -1,0 +1,154 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samridhhi</title>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+}
+.container {
+  padding: 20px;
+}
+.card {
+  background: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 15px;
+  text-align: center;
+}
+button {
+  padding: 10px;
+  width: 100%;
+  background: #FF6B35;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 8px;
+}
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+h1 { text-align: center; }
+.hidden { display: none; }
+.value {
+  font-size: 20px;
+  font-weight: bold;
+  color: #FF6B35;
+}
+</style>
+</head>
+<body><div class="container" id="loginPage">
+  <h1>Samridhhi</h1>
+  <input type="text" id="username" placeholder="Enter Username">
+  <input type="password" id="password" placeholder="Enter Password">
+  <button onclick="login()">Login</button>
+</div><div class="container hidden" id="homePage">
+  <h1>Samridhhi</h1>  <div class="card">
+    <h3>Today Update</h3>
+    <p id="date"></p>
+    <p id="time"></p>
+  </div>  <!-- Separate Editable Boxes -->  <div class="card">
+    <h3>Kalyan</h3>
+    <div class="value" id="kalyan">--</div>
+    <p>Aap sabka Swagat Hai</p>
+  </div>  <div class="card">
+    <h3>Time Bazar</h3>
+    <div class="value" id="timebazar">--</div>
+    <p>Aap sabka Swagat Hai</p>
+  </div>  <div class="card">
+    <h3>Madhur Day</h3>
+    <div class="value" id="madhurday">--</div>
+    <p>Aap sabka Swagat Hai</p>
+  </div>  <div class="card">
+    <h3>Shridevi</h3>
+    <div class="value" id="shridevi">--</div>
+    <p>Aap sabka Swagat Hai</p>
+  </div>  <div class="card">
+    <h3>Milan Day</h3>
+    <div class="value" id="milanday">--</div>
+    <p>Aap sabka Swagat Hai</p>
+  </div>  <div class="card">
+    <h3>Rajdhani Day</h3>
+    <div class="value" id="rajdhani">--</div>
+    <p>Aap sabka Swagat Hai</p>
+  </div>  <div class="card">
+    <h3>Shridevi Night</h3>
+    <div class="value" id="shridevinight">--</div>
+    <p>Aap sabka Swagat Hai</p>
+  </div>  <div class="card">
+    <h3>Kalyan Night</h3>
+    <div class="value" id="kalyannight">--</div>
+    <p>Aap sabka Swagat Hai</p>
+  </div>  <div class="card">
+    <h3>Milan Night</h3>
+    <div class="value" id="milannight">--</div>
+    <p>Aap sabka Swagat Hai</p>
+  </div>  <div class="card">
+    <h3>Main Bazar</h3>
+    <div class="value" id="mainbazar">--</div>
+    <p>Aap sabka Swagat Hai</p>
+  </div>  <div class="card">
+    <h3>Madhur Night</h3>
+    <div class="value" id="madhurnight">--</div>
+    <p>Aap sabka Swagat Hai</p>
+  </div></div><script>
+function login() {
+  let user = document.getElementById('username').value;
+  let pass = document.getElementById('password').value;
+
+  if(user === "AMIT" && pass === "Amit@123") {
+    document.getElementById('loginPage').classList.add('hidden');
+    document.getElementById('homePage').classList.remove('hidden');
+    updateTime();
+    setInterval(updateTime, 1000);
+  } else {
+    alert("Wrong Credentials");
+  }
+}
+
+function updateTime() {
+  let now = new Date();
+  let date = now.toLocaleDateString();
+
+  let hours = now.getHours();
+  let minutes = now.getMinutes();
+  let seconds = now.getSeconds();
+  let ampm = hours >= 12 ? 'PM' : 'AM';
+
+  hours = hours % 12 || 12;
+  minutes = minutes < 10 ? '0'+minutes : minutes;
+  seconds = seconds < 10 ? '0'+seconds : seconds;
+
+  let time = `${hours}:${minutes}:${seconds} ${ampm}`;
+
+  document.getElementById('date').innerText = date;
+  document.getElementById('time').innerText = time;
+}
+
+// 🔥 MANUAL UPDATE FUNCTION (you can change values anytime)
+function updateData() {
+  document.getElementById('kalyan').innerText = "123-45";
+  document.getElementById('timebazar').innerText = "678-90";
+  document.getElementById('madhurday').innerText = "111-22";
+  document.getElementById('shridevi').innerText = "333-44";
+  document.getElementById('milanday').innerText = "555-66";
+  document.getElementById('rajdhani').innerText = "777-88";
+  document.getElementById('shridevinight').innerText = "999-00";
+  document.getElementById('kalyannight').innerText = "222-33";
+  document.getElementById('milannight').innerText = "444-55";
+  document.getElementById('mainbazar').innerText = "666-77";
+  document.getElementById('madhurnight').innerText = "888-99";
+}
+
+// Auto load sample data
+updateData();
+</script></body>
+</html>
