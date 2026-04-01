@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+/* 🔥 Splash */
+#splash{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  z-index:9999;
+  animation:fadeOut 0.8s ease-out forwards 2.5s;
+  backdrop-filter:blur(10px);
+}
+
+#splash::before{
+  content:'';
+  position:absolute;
+  width:150px;
+  height:150px;
+  background:radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+  border-radius:50%;
+  animation:pulse 2s ease-in-out infinite;
+  top:30%;
+}
+
+@media(max-width:768px){
+  #splash::before{
+    width:100px;
+    height:100px;
+    top:20%;
+  }
+}
+
+@media(max-width:480px){
+  #splash::before{
+    width:60px;
+    height:60px;
+    top:15%;
+  }
+}
+
+#splash::after{
+  content:'';
+  position:absolute;
+  width:100px;
+  height:100px;
+  background:radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+  border-radius:50%;
+  animation:pulse 2.5s ease-in-out infinite 0.3s;
+  bottom:30%;
+  right:10%;
+}
+
+@media(max-width:768px){
+  #splash::after{
+    width:70px;
+    height:70px;
+    bottom:20%;
+    right:5%;
+  }
+}
+
+@media(max-width:480px){
+  #splash::after{
+    width:50px;
+    height:50px;
+    bottom:15%;
+    right:3%;
+  }
+}
+
+.splash-logo{
+  font-size:60px;
+  font-weight:900;
+  margin-bottom:20px;
+  animation:logoSlideIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s backwards;
+  letter-spacing:3px;
+  text-shadow:0 8px 32px rgba(0,0,0,0.2);
+  position:relative;
+  z-index:10;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  word-spacing:10px;
+}
+
+@media(max-width:768px){
+  .splash-logo{
+    font-size:48px;
+    margin-bottom:15px;
+    letter-spacing:1px;
+    word-spacing:5px;
+  }
+}
+
+@media(max-width:480px){
+  .splash-logo{
+    font-size:32px;
+    margin-bottom:10px;
+    letter-spacing:0.5px;
+    word-spacing:3px;
+  }
+}
+
+.splash-tagline{
+  font-size:16px;
+  font-weight:300;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  animation:fadeInUp 0.8s ease-out 0.6s backwards;
+  position:relative;
+  z-index:10;
+  opacity:0.9;
+}
+
+@media(max-width:768px){
+  .splash-tagline{
+    font-size:14px;
+    letter-spacing:1px;
+  }
+}
+
+@media(max-width:480px){
+  .splash-tagline{
+    font-size:12px;
+    letter-spacing:0.5px;
+  }
+}
+
+.splash-loader{
+  margin-top:40px;
+  display:flex;
+  gap:8px;
+  position:relative;
+  z-index:10;
+  animation:fadeInUp 0.8s ease-out 0.9s backwards;
+}
+
+@media(max-width:480px){
+  .splash-loader{
+    margin-top:30px;
+    gap:6px;
+  }
+}
+
+.loader-dot{
+  width:12px;
+  height:12px;
+  background:white;
+  border-radius:50%;
+  animation:bounce 1.4s ease-in-out infinite;
+}
+
+@media(max-width:480px){
+  .loader-dot{
+    width:8px;
+    height:8px;
+  }
+}
+
+.loader-dot:nth-child(2){
+  animation-delay:0.2s;
+}
+
+.loader-dot:nth-child(3){
+  animation-delay:0.4s;
+}
+
+@keyframes logoSlideIn{
+  from{
+    opacity:0;
+    transform:translateY(-30px) scale(0.8);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeInUp{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes bounce{
+  0%, 100%{
+    transform:translateY(0);
+    opacity:1;
+  }
+  50%{
+    transform:translateY(-15px);
+    opacity:0.6;
+  }
+}
+
+@keyframes pulse{
+  0%, 100%{
+    transform:scale(1);
+    opacity:0.5;
+  }
+  50%{
+    transform:scale(1.2);
+    opacity:0.2;
+  }
+}
+
+@keyframes fadeOut{
+  to{
+    opacity:0;
+    visibility:hidden;
+  }
+}
+
+/* Body */
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:#f4f4f4;
+}
+
+/* Header */
+.header{
+  background:linear-gradient(135deg, #FF6B35 0%, #ff9a5a 50%, #FFB366 100%);
+  color:white;
+  padding:25px 20px;
+  text-align:center;
+  font-size:24px;
+  font-weight:900;
+  border-radius:0 0 30px 30px;
+  box-shadow:0 10px 30px rgba(255,107,53,0.3);
+  position:relative;
+  overflow:hidden;
+  letter-spacing:2px;
+}
+
+.header::before{
+  content:'';
+  position:absolute;
+  top:-50%;
+  right:-50%;
+  width:500px;
+  height:500px;
+  background:radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  animation:float 6s ease-in-out infinite;
+}
+
+.header::after{
+  content:'';
+  position:absolute;
+  bottom:-50%;
+  left:-50%;
+  width:400px;
+  height:400px;
+  background:radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+  animation:float 8s ease-in-out infinite 1s reverse;
+}
+
+@keyframes float{
+  0%, 100%{transform:translate(0, 0);}
+  33%{transform:translate(30px, -30px);}
+  66%{transform:translate(-30px, 30px);}
+}
+
+/* Container */
+.container{
+  padding:20px;
+  background:linear-gradient(180deg, #f0f4ff 0%, #fff 100%);
+  min-height:calc(100vh - 80px);
+}
+
+/* Card */
+.card{
+  background:linear-gradient(135deg, #fff 0%, #f8f9ff 100%);
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:15px;
+  box-shadow:0 5px 20px rgba(102,126,234,0.1);
+  text-align:center;
+  animation:slideUp 0.5s ease;
+  border:2px solid rgba(102,126,234,0.15);
+  transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position:relative;
+  overflow:hidden;
+}
+
+.card::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition:left 0.5s ease;
+}
+
+.card:hover{
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:0 15px 40px rgba(102,126,234,0.2);
+  border-color:rgba(102,126,234,0.4);
+  background:linear-gradient(135deg, #fff 0%, #f0f4ff 100%);
+}
+
+.card:hover::before{
+  left:100%;
+}
+
+.card h3{
+  margin:8px 0 5px 0;
+  color:#667eea;
+  font-size:14px;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+  font-weight:700;
+}
+
+@keyframes slideUp{
+  from{transform:translateY(20px);opacity:0;}
+  to{transform:translateY(0);opacity:1;}
+}
+
+/* Value */
+.value{
+  font-size:20px;
+  color:#FF6B35;
+  font-weight:900;
+  margin-top:10px;
+  text-shadow:0 2px 8px rgba(255,107,53,0.25);
+  letter-spacing:1px;
+  position:relative;
+  z-index:2;
+  animation:slideInDown 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideInDown{
+  from{
+    opacity:0;
+    transform:translateY(-20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* Notice Board */
+#NoticBoard{
+  background:linear-gradient(135deg, #FFF8E7 0%, #FFECCC 100%);
+  padding:15px;
+  border-radius:12px;
+  margin-top:10px;
+  border-left:5px solid #FF6B35;
+  font-size:14px;
+  color:#333;
+  font-weight:500;
+  line-height:1.6;
+  animation:bounceIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes bounceIn{
+  0%{
+    opacity:0;
+    transform:scale(0.8);
+  }
+  50%{
+    opacity:1;
+  }
+  100%{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+/* Headings */
+h3{
+  margin:0 0 8px 0;
+  color:#667eea;
+  font-size:16px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  font-weight:700;
+}
+
+/* Scrollbar Styling */
+#chatBox::-webkit-scrollbar{
+  width:6px;
+}
+
+#chatBox::-webkit-scrollbar-track{
+  background:rgba(102,126,234,0.1);
+  border-radius:10px;
+}
+
+#chatBox::-webkit-scrollbar-thumb{
+  background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius:10px;
+}
+
+#chatBox::-webkit-scrollbar-thumb:hover{
+  background:linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+/* Input */
+input{
+  width:100%;
+  padding:15px;
+  margin:12px 0;
+  border-radius:12px;
+  border:2px solid #e0e0e0;
+  font-size:15px;
+  background:rgba(255,255,255,0.95);
+  transition:all 0.3s ease;
+  box-sizing:border-box;
+  font-family:inherit;
+}
+
+input:focus{
+  outline:none;
+  border-color:#667eea;
+  background:white;
+  box-shadow:0 0 20px rgba(102, 126, 234, 0.2);
+  transform:translateY(-2px);
+}
+
+input::placeholder{
+  color:#999;
+  font-weight:500;
+}
+
+/* Button */
+button{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:12px;
+  background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:all 0.3s ease;
+  box-shadow:0 8px 20px rgba(102, 126, 234, 0.3);
+  text-transform:uppercase;
+  letter-spacing:1px;
+  position:relative;
+  overflow:hidden;
+}
+
+button::before{
+  content:'';
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:0;
+  height:0;
+  border-radius:50%;
+  background:rgba(255,255,255,0.3);
+  transform:translate(-50%, -50%);
+  transition:width 0.6s, height 0.6s;
+}
+
+button:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 30px rgba(102, 126, 234, 0.4);
+}
+
+button:active{
+  transform:translateY(-1px);
+}
+
+/* Login Page Styles */
+#loginPage{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:0;
+  margin:0;
+  animation:pageSlideIn 0.8s ease-out;
+  z-index:1000;
+  top:0;
+  left:0;
+}
+
+#homePage{
+  z-index:500;
+  position:relative;
+}
+
+.login-container{
+  background:rgba(255, 255, 255, 0.95);
+  padding:40px;
+  border-radius:20px;
+  box-shadow:0 20px 60px rgba(0, 0, 0, 0.3);
+  width:90%;
+  max-width:400px;
+  backdrop-filter:blur(10px);
+  animation:formScaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.login-header{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.login-header h2{
+  font-size:26px;
+  color:#333;
+  margin:0 0 10px 0;
+  font-weight:800;
+  letter-spacing:1px;
+}
+
+.login-header p{
+  color:#999;
+  font-size:13px;
+  font-weight:500;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  margin:0;
+}
+
+.form-group{
+  margin-bottom:20px;
+  animation:slideInUp 0.6s ease-out backwards;
+}
+
+.form-group:nth-child(1){
+  animation-delay:0.1s;
+}
+
+.form-group:nth-child(2){
+  animation-delay:0.2s;
+}
+
+.form-group:nth-child(3){
+  animation-delay:0.3s;
+}
+
+.form-label{
+  display:block;
+  font-size:12px;
+  font-weight:600;
+  color:#667eea;
+  margin-bottom:8px;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+}
+
+@keyframes formScaleIn{
+  from{
+    opacity:0;
+    transform:scale(0.85);
+  }
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+@keyframes slideInUp{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes pageSlideIn{
+  from{
+    opacity:0;
+  }
+  to{
+    opacity:1;
+  }
+}
+
+/* Hidden */
+.hidden{
+  display:none !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+}
+
+/* Popup */
+.popup{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.6);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.popup-box{
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  text-align:center;
+  animation:zoom 0.3s;
+}
+
+@keyframes zoom{
+  from{transform:scale(0.7);}
+  to{transform:scale(1);}
+}
+
+/* Chat */
+#chatBox{
+  height:150px;
+  overflow-y:auto;
+  text-align:left;
+  padding:15px;
+  background:linear-gradient(135deg, #f0f4ff 0%, #fafbff 100%);
+  border-radius:12px;
+  margin-bottom:12px;
+  border:2px solid rgba(102,126,234,0.2);
+}
+
+#chatBox p{
+  margin:8px 0;
+  padding:12px 15px;
+  background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color:white;
+  border-radius:10px;
+  font-size:13px;
+  word-wrap:break-word;
+  animation:slideUp 0.4s ease;
+  box-shadow:0 4px 12px rgba(102,126,234,0.2);
+}
+
+#chatBox strong{
+  color:#FFD700;
+  font-weight:700;
+}
+
+#chatInput{
+  margin-bottom:10px;
+  background:white;
+}
+
+#chatInput:focus{
+  background:linear-gradient(135deg, rgba(102,126,234,0.03) 0%, rgba(118,75,162,0.03) 100%);
+  border-color:#667eea;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Splash -->
+<div id="splash">
+  <div class="splash-logo"><span style="display:inline-block;margin-right:5px;">✨</span>Samridhhi</div>
+  <div class="splash-tagline">Your Ultimate Platform</div>
+  <div class="splash-loader">
+    <div class="loader-dot"></div>
+    <div class="loader-dot"></div>
+    <div class="loader-dot"></div>
+  </div>
+</div>
+
+<!-- Login -->
+<div id="loginPage">
+  <div class="login-container">
+    <div class="login-header">
+      <h2>Samridhhi</h2>
+      <p>Welcome Back</p>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Username</label>
+      <input id="username" placeholder="Enter your username" type="text">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <input id="password" type="password" placeholder="Enter your password">
+    </div>
+    <div class="form-group">
+      <button type="button" onclick="login()">Sign In</button>
+    </div>
+  </div>
+</div>
+
+<!-- Home -->
+<div id="homePage" class="hidden">
+
+<div class="header">Samridhhi</div>
+
+<div class="container">
+
+<div class="card">
+  Kalyan
+  <div id="kalyan" class="value">--</div>
+  <div style="margin-top:5px;font-size:14px;">
+    OTC: <span id="kalyan_otc">----</span>
+  </div>
+  <div style="font-size:14px;">
+    CP: <span id="kalyan_cp">--</span>
+  </div>
+</div>
+<div class="card">
+  Time Bazar
+  <div id="timebazar" class="value">--</div>
+  <div style="margin-top:5px;font-size:14px;">
+    OTC: <span id="timebazar_otc">----</span>
+  </div>
+  <div style="font-size:14px;">
+    CP: <span id="timebazar_cp">--</span>
+  </div>
+</div>
+<div class="card">
+  Madhur Day
+  <div id="madhurday" class="value">--</div>
+  <div style="margin-top:5px;font-size:14px;">
+    OTC: <span id="madhurday_otc">----</span>
+  </div>
+  <div style="font-size:14px;">
+    CP: <span id="madhurday_cp">--</span>
+  </div>
+</div>
+<div class="card">
+  Shridevi
+  <div id="shridevi" class="value">--</div>
+  <div style="margin-top:5px;font-size:14px;">
+    OTC: <span id="shridevi_otc">----</span>
+  </div>
+  <div style="font-size:14px;">
+    CP: <span id="shridevi_cp">--</span>
+  </div>
+</div>
+<div class="card">
+  Milan Day
+  <div id="milanday" class="value">--</div>
+  <div style="margin-top:5px;font-size:14px;">
+    OTC: <span id="milanday_otc">----</span>
+  </div>
+  <div style="font-size:14px;">
+    CP: <span id="milanday_cp">--</span>
+  </div>
+</div>
+
+<div class="card">
+Notice
+<div id="NoticBoard"></div>
+</div>
+
+<div class="card">
+  Shridevi Night
+  <div id="shridevinight" class="value">--</div>
+  <div style="margin-top:5px;font-size:14px;">
+    OTC: <span id="shridevinight_otc">----</span>
+  </div>
+  <div style="font-size:14px;">
+    CP: <span id="shridevinight_cp">--</span>
+  </div>
+</div>
+<div class="card">
+  Kalyan Night
+  <div id="kalyannight" class="value">--</div>
+  <div style="margin-top:5px;font-size:14px;">
+    OTC: <span id="kalyannight_otc">----</span>
+  </div>
+  <div style="font-size:14px;">
+    CP: <span id="kalyannight_cp">--</span>
+  </div>
+</div>
+<div class="card">
+  Milan Night
+  <div id="milannight" class="value">--</div>
+  <div style="margin-top:5px;font-size:14px;">
+    OTC: <span id="milannight_otc">----</span>
+  </div>
+  <div style="font-size:14px;">
+    CP: <span id="milannight_cp">--</span>
+  </div>
+</div>
+<div class="card">
+  Main Bazar
+  <div id="mainbazar" class="value">--</div>
+  <div style="margin-top:5px;font-size:14px;">
+    OTC: <span id="mainbazar_otc">----</span>
+  </div>
+  <div style="font-size:14px;">
+    CP: <span id="mainbazar_cp">--</span>
+  </div>
+</div>
+<div class="card">
+  Madhur Night
+  <div id="madhurnight" class="value">--</div>
+  <div style="margin-top:5px;font-size:14px;">
+    OTC: <span id="madhurnight_otc">----</span>
+  </div>
+  <div style="font-size:14px;">
+    CP: <span id="madhurnight_cp">--</span>
+  </div>
+</div>
+
+<!-- Chat -->
+<div class="card">
+<h3>Live Chat</h3>
+<div id="chatBox"></div>
+<input id="chatInput">
+<button onclick="sendMessage()">Send</button>
+</div>
+
+</div>
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+import { getDatabase, ref, onValue, push } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAta5y-waWRQEi15if8nuJshtPmFckr7WQ",
+  authDomain: "sarvwer-b08c8.firebaseapp.com",
+  databaseURL: "https://sarvwer-b08c8-default-rtdb.firebaseio.com",
+  projectId: "sarvwer-b08c8",
+  storageBucket: "sarvwer-b08c8.firebasestorage.app",
+  messagingSenderId: "873801589850",
+  appId: "1:873801589850:web:bb2bcf1ecffddc034be463"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+/* Login */
+window.login = function(e){
+  if(e) e.preventDefault();
+  
+  const username = document.getElementById("username");
+  const password = document.getElementById("password");
+  const loginPage = document.getElementById("loginPage");
+  const homePage = document.getElementById("homePage");
+  
+  if(!username || !password) return false;
+  
+  if(username.value.trim()==="AMIT" && password.value.trim()==="Amit@123"){
+    loginPage.classList.add("hidden");
+    homePage.classList.remove("hidden");
+  } else {
+    alert("❌ Wrong credentials! Try again.");
+  }
+  
+  return false;
+}
+
+/* Firebase Data */
+onValue(ref(db,"samridhhi"), snap=>{
+  let d=snap.val();
+  if(d){
+    const updates = {
+      kalyan: d.kalyan,
+      timebazar: d.timebazar,
+      madhurday: d.madhurday,
+      shridevi: d.shridevi,
+      milanday: d.milanday,
+      NoticBoard: d.notice,
+      shridevinight: d.shridevinight,
+      kalyannight: d.kalyannight,
+      milannight: d.milannight,
+      mainbazar: d.mainbazar,
+      madhurnight: d.madhurnight
+    };
+    
+    for(let id in updates){
+      const elem = document.getElementById(id);
+      if(elem) elem.innerText = updates[id];
+    }
+
+    // OTC and CP Updates
+    const otc = document.getElementById("otc");
+    if(otc) otc.innerText = d.otc || "----";
+
+    const kalyan_cp = document.getElementById("kalyan_cp");
+    if(kalyan_cp) kalyan_cp.innerText = d.kalyan_cp || "--";
+
+    const timebazar_cp = document.getElementById("timebazar_cp");
+    if(timebazar_cp) timebazar_cp.innerText = d.timebazar_cp || "--";
+
+    const madhurday_cp = document.getElementById("madhurday_cp");
+    if(madhurday_cp) madhurday_cp.innerText = d.madhurday_cp || "--";
+
+    const shridevi_cp = document.getElementById("shridevi_cp");
+    if(shridevi_cp) shridevi_cp.innerText = d.shridevi_cp || "--";
+
+    const milanday_cp = document.getElementById("milanday_cp");
+    if(milanday_cp) milanday_cp.innerText = d.milanday_cp || "--";
+
+    const shridevinight_cp = document.getElementById("shridevinight_cp");
+    if(shridevinight_cp) shridevinight_cp.innerText = d.shridevinight_cp || "--";
+
+    const kalyannight_cp = document.getElementById("kalyannight_cp");
+    if(kalyannight_cp) kalyannight_cp.innerText = d.kalyannight_cp || "--";
+
+    const milannight_cp = document.getElementById("milannight_cp");
+    if(milannight_cp) milannight_cp.innerText = d.milannight_cp || "--";
+
+    const mainbazar_cp = document.getElementById("mainbazar_cp");
+    if(mainbazar_cp) mainbazar_cp.innerText = d.mainbazar_cp || "--";
+
+    const madhurnight_cp = document.getElementById("madhurnight_cp");
+    if(madhurnight_cp) madhurnight_cp.innerText = d.madhurnight_cp || "--";
+
+    // OTC for each card
+    const kalyan_otc = document.getElementById("kalyan_otc");
+    if(kalyan_otc) kalyan_otc.innerText = d.kalyan_otc || "----";
+
+    const timebazar_otc = document.getElementById("timebazar_otc");
+    if(timebazar_otc) timebazar_otc.innerText = d.timebazar_otc || "----";
+
+    const madhurday_otc = document.getElementById("madhurday_otc");
+    if(madhurday_otc) madhurday_otc.innerText = d.madhurday_otc || "----";
+
+    const shridevi_otc = document.getElementById("shridevi_otc");
+    if(shridevi_otc) shridevi_otc.innerText = d.shridevi_otc || "----";
+
+    const milanday_otc = document.getElementById("milanday_otc");
+    if(milanday_otc) milanday_otc.innerText = d.milanday_otc || "----";
+
+    const shridevinight_otc = document.getElementById("shridevinight_otc");
+    if(shridevinight_otc) shridevinight_otc.innerText = d.shridevinight_otc || "----";
+
+    const kalyannight_otc = document.getElementById("kalyannight_otc");
+    if(kalyannight_otc) kalyannight_otc.innerText = d.kalyannight_otc || "----";
+
+    const milannight_otc = document.getElementById("milannight_otc");
+    if(milannight_otc) milannight_otc.innerText = d.milannight_otc || "----";
+
+    const mainbazar_otc = document.getElementById("mainbazar_otc");
+    if(mainbazar_otc) mainbazar_otc.innerText = d.mainbazar_otc || "----";
+
+    const madhurnight_otc = document.getElementById("madhurnight_otc");
+    if(madhurnight_otc) madhurnight_otc.innerText = d.madhurnight_otc || "----";
+  }
+});
+
+/* Chat */
+window.sendMessage = function(){
+  let msg = document.getElementById("chatInput").value;
+
+  if(msg.trim() !== ""){
+    push(ref(db, "chat"), {
+      user: "AMIT",
+      message: msg,
+      time: Date.now()
+    });
+
+    document.getElementById("chatInput").value = "";
+  }
+}
+
+onValue(ref(db, "chat"), (snapshot) => {
+  let chatBox = document.getElementById("chatBox");
+  chatBox.innerHTML = "";
+
+  snapshot.forEach((child) => {
+    let data = child.val();
+
+    chatBox.innerHTML += `
+      <div style="margin-bottom:5px;">
+        <b>${data.user}:</b> ${data.message}
+      </div>
+    `;
+  });
+
+  chatBox.scrollTop = chatBox.scrollHeight;
+});
+
+</script>
+
+</body>
+</html>
